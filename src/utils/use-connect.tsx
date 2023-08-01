@@ -7,6 +7,9 @@ const KEY =
 const broadcast = new BroadcastChannel(KEY);
 
 export const useConnect = () => {
+  const refreshToken = localStorage.getItem("token");
+  const accessToken = localStorage.getItem("tokenA");
+
   const [isConnected, setConnected] = useState(false);
 
   useEffect(() => {
