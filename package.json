@@ -2,7 +2,7 @@
   "name": "repeater",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://chopperqt.github.io/repeater/",
+  "homepage": "/repeater/",
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
     "@reduxjs/toolkit": "^1.8.4",

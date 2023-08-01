@@ -1,48 +1,30 @@
-import {
-  Form,
-  Input,
-  Button,
-  Col,
-  Row,
-  Switch,
-} from 'antd'
+import { Form, Input, Button, Col, Row, Switch } from "antd";
 import {
   PlusOutlined,
   DeleteOutlined,
   CheckOutlined,
   CloseOutlined,
   PlayCircleOutlined,
-} from '@ant-design/icons'
+} from "@ant-design/icons";
 
 import {
   ENGLISH_TEXT,
   RUSSIA_TEXT,
   ADD_BUTTON_TEXT,
   START_BUTTON_TEXT,
-} from 'language/ru'
-import {
-  RulesRussiaField,
-  RulesEnglishField,
-} from 'assets/rules'
+} from "language/ru";
+import { RulesRussiaField, RulesEnglishField } from "assets/rules";
 
-import useWordsList from './useWordsList'
+import useWordsList from "./useWordsList";
 
-import styles from './WordsList.module.scss'
+import styles from "./WordsList.module.scss";
 
 const List = () => {
-  const {
-    handleChange,
-    handleFinish,
-    hasDisabled,
-    wordsFromLocal,
-  } = useWordsList()
+  const { handleChange, handleFinish, hasDisabled, wordsFromLocal } =
+    useWordsList();
 
   return (
-    <Row
-      justify='center'
-      align='middle'
-      className={styles.layout}
-    >
+    <Row justify="center" align="middle" className={styles.layout}>
       <Col span={24}>
         <Form
           onValuesChange={handleChange}
@@ -52,19 +34,12 @@ const List = () => {
           <Form.List name="words">
             {(fields, { add, remove }) => (
               <Col span={24}>
-                {fields.map(({
-                  key,
-                  name,
-                  ...resetField
-                }) => (
-                  <Row
-                    key={key}
-                    gutter={[12, 12]}
-                  >
+                {fields.map(({ key, name, ...resetField }) => (
+                  <Row key={key} gutter={[12, 12]}>
                     <Col>
                       <Form.Item
                         {...resetField}
-                        name={[name, 'isActive']}
+                        name={[name, "isActive"]}
                         valuePropName="checked"
                       >
                         <Switch
@@ -74,31 +49,22 @@ const List = () => {
                         />
                       </Form.Item>
                     </Col>
-                    <Col
-                      span={9}
-                      lg={9}
-                    >
+                    <Col span={9} lg={9}>
                       <Form.Item
                         {...resetField}
-                        name={[name, 'english']}
+                        name={[name, "english"]}
                         rules={RulesEnglishField}
                       >
-                        <Input
-                          size="large"
-                          placeholder={ENGLISH_TEXT}
-                        />
+                        <Input size="large" placeholder={ENGLISH_TEXT} />
                       </Form.Item>
                     </Col>
                     <Col span={9}>
                       <Form.Item
                         {...resetField}
-                        name={[name, 'russia']}
+                        name={[name, "russia"]}
                         rules={RulesRussiaField}
                       >
-                        <Input
-                          placeholder={RUSSIA_TEXT}
-                          size="large"
-                        />
+                        <Input placeholder={RUSSIA_TEXT} size="large" />
                       </Form.Item>
                     </Col>
                     <Col span={3}>
@@ -116,11 +82,11 @@ const List = () => {
                 <Row>
                   <Col span={23}>
                     <Button
+                      icon={<PlusOutlined />}
                       onClick={() => add()}
                       type="dashed"
                       block={true}
                     >
-                      <PlusOutlined />
                       {ADD_BUTTON_TEXT}
                     </Button>
                   </Col>
@@ -129,25 +95,22 @@ const List = () => {
             )}
           </Form.List>
           <Col span={24}>
-            <Row justify='center'>
+            <Row justify="center">
               <Form.Item>
                 <Button
                   htmlType="submit"
-                  size="large"
-                  type='primary'
                   className={styles.button}
                   disabled={hasDisabled}
-                  icon={<PlayCircleOutlined />}
                 >
                   {START_BUTTON_TEXT}
                 </Button>
               </Form.Item>
             </Row>
           </Col>
-        </Form >
+        </Form>
       </Col>
     </Row>
-  )
-}
+  );
+};
 
-export default List
+export default List;

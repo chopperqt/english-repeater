@@ -1,7 +1,3 @@
-body {
-  background: url('./assets/images/bg.png');
-}
-
 .container {
   width: 600px;
   display: flex;
@@ -25,4 +21,12 @@ body {
     display: flex;
     justify-content: center;
   }
+}
+
+.spin {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

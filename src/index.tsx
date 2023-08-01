@@ -13,7 +13,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <Provider store={store}>
-    <BrowserRouter>
+    <BrowserRouter basename="/repeater">
       <React.StrictMode>
         <App />
       </React.StrictMode>

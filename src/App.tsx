@@ -1,64 +1,57 @@
+import { Row, Col, Steps, Spin } from "antd";
+import { useSelector } from "react-redux";
 
-import {
-  Row,
-  Col,
-  Steps
-} from 'antd';
-import { useSelector } from 'react-redux';
+import { RootState } from "services/store";
+import { Mode, WordsList, Result, Game } from "pages";
+import { useConnect } from "utils/use-connect";
 
-import { RootState } from 'services/store';
-import {
-  Mode,
-  WordsList,
-  Result,
-  Game,
-} from 'pages';
+import "./App.scss";
 
-import './App.scss'
-
-const RESULT_STEP = 3
+const RESULT_STEP = 3;
 
 const steps = [
   {
-    title: 'Список слов',
-    content: <WordsList />
+    title: "Список слов",
+    content: <WordsList />,
   },
   {
-    title: 'Мод',
-    content: <Mode />
+    title: "Мод",
+    content: <Mode />,
   },
   {
-    title: 'Проверка',
+    title: "Проверка",
     content: <Game />,
   },
   {
-    title: 'Результат',
-    content: <Result />
-  }
-]
+    title: "Результат",
+    content: <Result />,
+  },
+];
 
 function App() {
-  const currentStep = useSelector((state: RootState) => state.settings.step)
+  const currentStep = useSelector((state: RootState) => state.settings.step);
+
+  const { isConnected } = useConnect();
+
+  if (!isConnected) {
+    return (
+      <div className="spin">
+        <Spin size="large" />
+      </div>
+    );
+  }
 
   return (
     <div className="App">
-      <Row
-        justify='center'
-        align='middle'
-      >
+      <Row justify="center" align="middle">
         <Col>
-          <div className="container">
-            {steps[currentStep].content}
-          </div>
+          <div className="container">{steps[currentStep].content}</div>
           {currentStep !== RESULT_STEP && (
             <div className="container">
-              <div className='steps'>
+              <div className="steps">
                 <Steps current={currentStep}>
                   {steps.map(({ title }) => (
-                    <Steps.Step
-                      key={title}
-                      title={title}
-                    />
+                    <Steps.Step key={title} title={title} />
                   ))}
                 </Steps>
               </div>
