@@ -1,4 +1,4 @@
-export interface Word {
+export interface LibraryWord {
   id: number;
   userID: string;
   word: string;

@@ -4,14 +4,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { WordsForm } from "models/main";
 import { nextStep, setWords } from "services/settings/settings";
 import { RootState } from "services/store";
-import { getNormalizeWords } from "./helpers/getNormalizedWords";
 import { getPinWords } from "api/library.api";
+
+import { getNormalizeWords } from "../helpers/getNormalizedWords";
 
 const defaultValue = {
   words: [],
 };
 
-const useWordsList = () => {
+interface UseWordList {
+  userId: string | null;
+}
+
+const useWordsList = ({ userId }: UseWordList) => {
   const dispatch = useDispatch();
   const valuesFromLocal = localStorage.getItem("settings");
   const words = useSelector((state: RootState) => state.settings.words).filter(
@@ -21,7 +26,7 @@ const useWordsList = () => {
     ? JSON.parse(valuesFromLocal)
     : defaultValue;
 
-  const handleChange = ({}, allValues: WordsForm) => {
+  const handleChange = ({ }, allValues: WordsForm) => {
     const normalizedWords = getNormalizeWords(allValues.words);
 
     const valuesToJSON = JSON.stringify({
@@ -44,7 +49,10 @@ const useWordsList = () => {
   };
 
   const handleGetPinWords = async () => {
-    const res = await getPinWords("2e2f22fd-41d3-4c62-a558-9700e2f65d0a");
+    console.log("userId", userId);
+    if (!userId) return;
+
+    const res = await getPinWords(userId);
 
     console.log(res);
   };

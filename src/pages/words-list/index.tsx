@@ -15,20 +15,24 @@ import {
 } from "language/ru";
 import { RulesRussiaField, RulesEnglishField } from "assets/rules";
 
-import useWordsList from "./useWordsList";
+import useWordsList from "./hooks/useWordsList";
 
 import styles from "./WordsList.module.scss";
+import { useSelector } from "react-redux";
+import { RootState } from "services/store";
 
 const LOAD_PINED_WORDS_TEXT = "Download pinned words";
 
 const List = () => {
+  const userId = useSelector((state: RootState) => state.user.userId);
+
   const {
     handleChange,
     handleFinish,
     hasDisabled,
     wordsFromLocal,
     handleGetPinWords,
-  } = useWordsList();
+  } = useWordsList({ userId });
 
   return (
     <Row justify="center" align="middle" className={styles.layout}>
