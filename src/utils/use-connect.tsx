@@ -1,3 +1,4 @@
+import { loginUser } from "api/auth.api";
 import { useEffect, useState } from "react";
 
 const KEY =
@@ -18,6 +19,14 @@ export const useConnect = () => {
     });
 
     setConnected(true);
+  }, []);
+
+  useEffect(() => {
+    if (!refreshToken || !accessToken) {
+      return;
+    }
+
+    loginUser(refreshToken, accessToken);
   }, []);
 
   return {

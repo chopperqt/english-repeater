@@ -22,13 +22,20 @@ import styles from "./WordsList.module.scss";
 const LOAD_PINED_WORDS_TEXT = "Download pinned words";
 
 const List = () => {
-  const { handleChange, handleFinish, hasDisabled, wordsFromLocal } =
-    useWordsList();
+  const {
+    handleChange,
+    handleFinish,
+    hasDisabled,
+    wordsFromLocal,
+    handleGetPinWords,
+  } = useWordsList();
 
   return (
     <Row justify="center" align="middle" className={styles.layout}>
       <Col span={24}>
-        <Button icon={<DownloadOutlined />}>{LOAD_PINED_WORDS_TEXT}</Button>
+        <Button onClick={handleGetPinWords} icon={<DownloadOutlined />}>
+          {LOAD_PINED_WORDS_TEXT}
+        </Button>
         <Form
           onValuesChange={handleChange}
           initialValues={wordsFromLocal}
