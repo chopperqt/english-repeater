@@ -25,6 +25,9 @@ const LOAD_PINED_WORDS_TEXT = "Download pinned words";
 
 const List = () => {
   const userId = useSelector((state: RootState) => state.user.userId);
+  const words = useSelector((state: RootState) => state.settings.words);
+
+  const [form] = Form.useForm();
 
   const {
     handleChange,
@@ -32,7 +35,9 @@ const List = () => {
     hasDisabled,
     wordsFromLocal,
     handleGetPinWords,
-  } = useWordsList({ userId });
+  } = useWordsList({ userId, words, setFieldsValue: form.setFieldsValue });
+
+  console.log("words", words, wordsFromLocal);
 
   return (
     <Row justify="center" align="middle" className={styles.layout}>
@@ -41,6 +46,7 @@ const List = () => {
           {LOAD_PINED_WORDS_TEXT}
         </Button>
         <Form
+          form={form}
           onValuesChange={handleChange}
           initialValues={wordsFromLocal}
           onFinish={handleFinish}

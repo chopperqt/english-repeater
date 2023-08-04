@@ -1,9 +1,8 @@
-import { useMemo, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
-import { WordsForm } from "models/main";
+import { WordsForm, WordsValues } from "models/main";
 import { nextStep, setWords } from "services/settings/settings";
-import { RootState } from "services/store";
 import { getPinWords } from "api/library.api";
 
 import { getNormalizeWords } from "../helpers/getNormalizedWords";
@@ -14,14 +13,16 @@ const defaultValue = {
 
 interface UseWordList {
   userId: string | null;
+  words: WordsValues[];
+  setFieldsValue: (value: any) => void;
 }
 
-const useWordsList = ({ userId }: UseWordList) => {
+const useWordsList = ({ userId, words, setFieldsValue }: UseWordList) => {
   const dispatch = useDispatch();
+
   const valuesFromLocal = localStorage.getItem("settings");
-  const words = useSelector((state: RootState) => state.settings.words).filter(
-    Boolean
-  ).length;
+  const amountOfWords = words.length;
+
   const wordsFromLocal = valuesFromLocal
     ? JSON.parse(valuesFromLocal)
     : defaultValue;
@@ -38,6 +39,10 @@ const useWordsList = ({ userId }: UseWordList) => {
     localStorage.setItem("settings", valuesToJSON);
   };
 
+  useEffect(() => {
+    setFieldsValue({ words });
+  }, [words]);
+
   const handleFinish = (values: WordsForm) => {
     const settingsToJSON = JSON.stringify(values);
 
@@ -49,7 +54,6 @@ const useWordsList = ({ userId }: UseWordList) => {
   };
 
   const handleGetPinWords = async () => {
-    console.log("userId", userId);
     if (!userId) return;
 
     const res = await getPinWords(userId);
@@ -57,13 +61,7 @@ const useWordsList = ({ userId }: UseWordList) => {
     console.log(res);
   };
 
-  const hasDisabled = useMemo(() => {
-    if (!words) {
-      return true;
-    }
-
-    return false;
-  }, [words]);
+  const hasDisabled = !amountOfWords;
 
   useEffect(() => {
     dispatch(setWords(wordsFromLocal));

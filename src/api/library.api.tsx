@@ -2,7 +2,7 @@ import supabase from "api";
 import { normalizeLibraryWords } from "helpers/normalizeLibraryWords";
 
 import type { LibraryWord } from "models/library";
-import { setWords } from "services/game/game";
+import { setOnlyWords } from "services/settings/settings";
 import { store } from "services/store";
 
 /**
@@ -28,7 +28,7 @@ export const getPinWords = async (
 
     const normalizedPinWords = data.map(normalizeLibraryWords);
 
-    store.dispatch(setWords(normalizedPinWords));
+    store.dispatch(setOnlyWords(normalizedPinWords));
 
     return data;
   } catch (_) {
