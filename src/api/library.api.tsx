@@ -1,6 +1,9 @@
 import supabase from "api";
+import { normalizeLibraryWords } from "helpers/normalizeLibraryWords";
 
 import type { LibraryWord } from "models/library";
+import { setWords } from "services/game/game";
+import { store } from "services/store";
 
 /**
  * Событие получения закрепленных слов из БД
@@ -22,6 +25,10 @@ export const getPinWords = async (
     if (error) {
       return null;
     }
+
+    const normalizedPinWords = data.map(normalizeLibraryWords);
+
+    store.dispatch(setWords(normalizedPinWords));
 
     return data;
   } catch (_) {
