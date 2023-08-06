@@ -1,4 +1,5 @@
 import { Form, Input, Button, Col, Row, Switch } from "antd";
+import { useSelector } from "react-redux";
 import {
   PlusOutlined,
   DeleteOutlined,
@@ -7,6 +8,7 @@ import {
   DownloadOutlined,
 } from "@ant-design/icons";
 
+import { RootState } from "services/store";
 import {
   ENGLISH_TEXT,
   RUSSIA_TEXT,
@@ -18,10 +20,9 @@ import { RulesRussiaField, RulesEnglishField } from "assets/rules";
 import useWordsList from "./hooks/useWordsList";
 
 import styles from "./WordsList.module.scss";
-import { useSelector } from "react-redux";
-import { RootState } from "services/store";
 
-const LOAD_PINED_WORDS_TEXT = "Download pinned words";
+const LOAD_PINED_WORDS_TEXT = "Get pinned words";
+const GET_RANGOM_WORDS_TEXT = "Get random words";
 
 const List = () => {
   const userId = useSelector((state: RootState) => state.user.userId);
@@ -35,16 +36,20 @@ const List = () => {
     hasDisabled,
     wordsFromLocal,
     handleGetPinWords,
+    handleGetRandomWords,
   } = useWordsList({ userId, words, setFieldsValue: form.setFieldsValue });
-
-  console.log("words", words, wordsFromLocal);
 
   return (
     <Row justify="center" align="middle" className={styles.layout}>
       <Col span={24}>
-        <Button onClick={handleGetPinWords} icon={<DownloadOutlined />}>
-          {LOAD_PINED_WORDS_TEXT}
-        </Button>
+        <div className={styles.actionsWrapper}>
+          <Button onClick={handleGetPinWords} icon={<DownloadOutlined />}>
+            {LOAD_PINED_WORDS_TEXT}
+          </Button>
+          <Button onClick={handleGetRandomWords} icon={<DownloadOutlined />}>
+            {GET_RANGOM_WORDS_TEXT}
+          </Button>
+        </div>
         <Form
           form={form}
           onValuesChange={handleChange}

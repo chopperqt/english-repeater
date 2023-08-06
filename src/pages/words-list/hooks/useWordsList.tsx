@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 
 import { WordsForm, WordsValues } from "models/main";
 import { nextStep, setWords } from "services/settings/settings";
-import { getPinWords } from "api/library.api";
+import { getPinWords, getRandomWords } from "api/library.api";
 
 import { getNormalizeWords } from "../helpers/getNormalizedWords";
 
@@ -27,7 +27,7 @@ const useWordsList = ({ userId, words, setFieldsValue }: UseWordList) => {
     ? JSON.parse(valuesFromLocal)
     : defaultValue;
 
-  const handleChange = ({ }, allValues: WordsForm) => {
+  const handleChange = ({}, allValues: WordsForm) => {
     const normalizedWords = getNormalizeWords(allValues.words);
 
     const valuesToJSON = JSON.stringify({
@@ -61,6 +61,10 @@ const useWordsList = ({ userId, words, setFieldsValue }: UseWordList) => {
     console.log(res);
   };
 
+  const handleGetRandomWords = async () => {
+    await getRandomWords();
+  };
+
   const hasDisabled = !amountOfWords;
 
   useEffect(() => {
@@ -71,6 +75,7 @@ const useWordsList = ({ userId, words, setFieldsValue }: UseWordList) => {
     handleChange,
     handleFinish,
     handleGetPinWords,
+    handleGetRandomWords,
     hasDisabled,
     wordsFromLocal,
   };
