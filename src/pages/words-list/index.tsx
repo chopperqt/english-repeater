@@ -1,4 +1,4 @@
-import { Form, Input, Button, Col, Row, Switch } from "antd";
+import { Form, Input, Button, Col, Row, Switch, Select } from "antd";
 import { useSelector } from "react-redux";
 import {
   PlusOutlined,
@@ -47,6 +47,22 @@ const List = () => {
           <Button onClick={handleGetPinWords} icon={<DownloadOutlined />}>
             {LOAD_PINED_WORDS_TEXT}
           </Button>
+          <Select
+            options={[
+              {
+                value: 5,
+                label: 5,
+              },
+              {
+                value: 10,
+                label: 10,
+              },
+              {
+                value: 15,
+                label: 15,
+              },
+            ]}
+          />
           <Button onClick={handleGetRandomWords} icon={<DownloadOutlined />}>
             {GET_RANGOM_WORDS_TEXT}
           </Button>
