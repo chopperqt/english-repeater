@@ -23,6 +23,7 @@ import styles from "./WordsList.module.scss";
 
 const LOAD_PINED_WORDS_TEXT = "Get pinned words";
 const GET_RANGOM_WORDS_TEXT = "Get random words";
+const CLEAR_TEXT = "Clear words";
 
 const List = () => {
   const userId = useSelector((state: RootState) => state.user.userId);
@@ -49,12 +50,14 @@ const List = () => {
           <Button onClick={handleGetRandomWords} icon={<DownloadOutlined />}>
             {GET_RANGOM_WORDS_TEXT}
           </Button>
+          <Button icon={<DeleteOutlined />}>{CLEAR_TEXT}</Button>
         </div>
         <Form
           form={form}
           onValuesChange={handleChange}
           initialValues={wordsFromLocal}
           onFinish={handleFinish}
+          className={styles.form}
         >
           <Form.List name="words">
             {(fields, { add, remove }) => (
