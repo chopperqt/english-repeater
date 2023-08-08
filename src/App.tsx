@@ -1,9 +1,10 @@
-import { Row, Col, Steps, Spin } from "antd";
+import { Row, Col, Spin } from "antd";
 import { useSelector } from "react-redux";
 
 import { RootState } from "services/store";
 import { Mode, WordsList, Result, Game } from "pages";
 import { useConnect } from "utils/use-connect";
+import { RepeaterSteps } from "layouts/repeater-steps";
 
 import "./App.scss";
 
@@ -47,15 +48,7 @@ function App() {
         <Col>
           <div className="container">{steps[currentStep].content}</div>
           {currentStep !== RESULT_STEP && (
-            <div className="container">
-              <div className="steps">
-                <Steps current={currentStep}>
-                  {steps.map(({ title }) => (
-                    <Steps.Step key={title} title={title} />
-                  ))}
-                </Steps>
-              </div>
-            </div>
+            <RepeaterSteps steps={steps} currentStep={currentStep} />
           )}
         </Col>
       </Row>

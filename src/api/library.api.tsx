@@ -1,9 +1,10 @@
 import supabase from "api";
 import { normalizeLibraryWords } from "helpers/normalizeLibraryWords";
 
-import type { LibraryWord } from "models/library";
 import { setOnlyWords } from "services/settings/settings";
 import { store } from "services/store";
+
+import type { LibraryWord } from "models/library";
 
 /**
  * Событие получения закрепленных слов из БД
@@ -40,7 +41,15 @@ export const getRandomWords = async (limit = 15) => {
   try {
     const { data, error } = await supabase.from("random_words").select("*");
 
-    console.log(data);
+    if (error) {
+      return null;
+    }
+
+    const normalizedData = data.map(normalizeLibraryWords);
+
+    store.dispatch(setOnlyWords(normalizedData));
+
+    return normalizedData;
   } catch (_) {
     return null;
   }

@@ -10,19 +10,6 @@
   }
 }
 
-.steps {
-  position: fixed;
-  bottom: 20px;
-  width: 100%;
-  width: inherit;
-
-  @media screen and (max-width: 600px) {
-    width: fit-content;
-    display: flex;
-    justify-content: center;
-  }
-}
-
 .spin {
   width: 100%;
   height: 100vh;
