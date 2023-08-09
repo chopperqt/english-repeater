@@ -20,6 +20,7 @@ import { RulesRussiaField, RulesEnglishField } from "assets/rules";
 import useWordsList from "./hooks/useWordsList";
 
 import styles from "./WordsList.module.scss";
+import { CountItems } from "./constants";
 
 const LOAD_PINED_WORDS_TEXT = "Get pinned words";
 const GET_RANGOM_WORDS_TEXT = "Get random words";
@@ -36,8 +37,10 @@ const List = () => {
     handleFinish,
     hasDisabled,
     wordsFromLocal,
+    limit,
     handleGetPinWords,
     handleGetRandomWords,
+    handleChangeLimit,
   } = useWordsList({ userId, words, setFieldsValue: form.setFieldsValue });
 
   return (
@@ -47,25 +50,15 @@ const List = () => {
           <Button onClick={handleGetPinWords} icon={<DownloadOutlined />}>
             {LOAD_PINED_WORDS_TEXT}
           </Button>
-          <Select
-            options={[
-              {
-                value: 5,
-                label: 5,
-              },
-              {
-                value: 10,
-                label: 10,
-              },
-              {
-                value: 15,
-                label: 15,
-              },
-            ]}
-          />
           <Button onClick={handleGetRandomWords} icon={<DownloadOutlined />}>
             {GET_RANGOM_WORDS_TEXT}
           </Button>
+          <Select
+            className={styles.select}
+            defaultValue={limit}
+            options={CountItems}
+            onChange={handleChangeLimit}
+          />
           <Button icon={<DeleteOutlined />}>{CLEAR_TEXT}</Button>
         </div>
         <Form

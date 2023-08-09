@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
 import { WordsForm, WordsValues } from "models/main";
@@ -20,6 +20,8 @@ interface UseWordList {
 const useWordsList = ({ userId, words, setFieldsValue }: UseWordList) => {
   const dispatch = useDispatch();
 
+  const [limit, setLimit] = useState(5);
+
   const valuesFromLocal = localStorage.getItem("settings");
   const amountOfWords = words.length;
 
@@ -27,7 +29,7 @@ const useWordsList = ({ userId, words, setFieldsValue }: UseWordList) => {
     ? JSON.parse(valuesFromLocal)
     : defaultValue;
 
-  const handleChange = ({}, allValues: WordsForm) => {
+  const handleChange = ({ }, allValues: WordsForm) => {
     const normalizedWords = getNormalizeWords(allValues.words);
 
     const valuesToJSON = JSON.stringify({
@@ -62,7 +64,11 @@ const useWordsList = ({ userId, words, setFieldsValue }: UseWordList) => {
   };
 
   const handleGetRandomWords = async () => {
-    await getRandomWords();
+    await getRandomWords(limit);
+  };
+
+  const handleChangeLimit = (newLimit: number) => {
+    setLimit(newLimit);
   };
 
   const hasDisabled = !amountOfWords;
@@ -76,6 +82,8 @@ const useWordsList = ({ userId, words, setFieldsValue }: UseWordList) => {
     handleFinish,
     handleGetPinWords,
     handleGetRandomWords,
+    handleChangeLimit,
+    limit,
     hasDisabled,
     wordsFromLocal,
   };

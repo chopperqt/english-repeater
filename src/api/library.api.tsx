@@ -37,9 +37,11 @@ export const getPinWords = async (
   }
 };
 
-export const getRandomWords = async (limit = 15) => {
+export const getRandomWords = async (limit: number) => {
   try {
-    const { data, error } = await supabase.from("random_words").select("*");
+    const { data, error } = await supabase
+      .from(`random_words_${limit}`)
+      .select("*");
 
     if (error) {
       return null;
