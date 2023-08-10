@@ -20,3 +20,25 @@
 .select {
   width: 100%;
 }
+
+.offset {
+  margin-bottom: 24px;
+}
+
+.wrapper {
+  align-items: center;
+  display: flex;
+  column-gap: 10px;
+  justify-content: space-between;
+}
+
+.fieldsWrapper {
+  flex-shrink: 5;
+  width: 100%;
+  column-gap: 10px;
+  display: flex;
+}
+
+.input {
+  width: 100%;
+}

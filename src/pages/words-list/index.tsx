@@ -1,26 +1,19 @@
-import { Form, Input, Button, Col, Row, Switch, Select } from "antd";
+import { Form, Button, Col, Row, Select } from "antd";
 import { useSelector } from "react-redux";
 import {
   PlusOutlined,
   DeleteOutlined,
-  CheckOutlined,
-  CloseOutlined,
   DownloadOutlined,
 } from "@ant-design/icons";
 
 import { RootState } from "services/store";
-import {
-  ENGLISH_TEXT,
-  RUSSIA_TEXT,
-  ADD_BUTTON_TEXT,
-  START_BUTTON_TEXT,
-} from "language/ru";
-import { RulesRussiaField, RulesEnglishField } from "assets/rules";
+import { ADD_BUTTON_TEXT, START_BUTTON_TEXT } from "language/ru";
 
 import useWordsList from "./hooks/useWordsList";
 
 import styles from "./WordsList.module.scss";
 import { CountItems } from "./constants";
+import { Item } from "./partials/item";
 
 const LOAD_PINED_WORDS_TEXT = "Get pinned words";
 const GET_RANGOM_WORDS_TEXT = "Get random words";
@@ -41,10 +34,11 @@ const List = () => {
     handleGetPinWords,
     handleGetRandomWords,
     handleChangeLimit,
+    handleReset,
   } = useWordsList({ userId, words, setFieldsValue: form.setFieldsValue });
 
   return (
-    <Row justify="center" align="middle" className={styles.layout}>
+    <Row justify="center" className={styles.layout}>
       <Col span={24}>
         <div className={styles.actionsWrapper}>
           <Button onClick={handleGetPinWords} icon={<DownloadOutlined />}>
@@ -59,7 +53,9 @@ const List = () => {
             options={CountItems}
             onChange={handleChangeLimit}
           />
-          <Button icon={<DeleteOutlined />}>{CLEAR_TEXT}</Button>
+          <Button onClick={handleReset} icon={<DeleteOutlined />}>
+            {CLEAR_TEXT}
+          </Button>
         </div>
         <Form
           form={form}
@@ -71,53 +67,17 @@ const List = () => {
           <Form.List name="words">
             {(fields, { add, remove }) => (
               <Col span={24}>
-                {fields.map(({ key, name, ...resetField }) => (
-                  <Row key={key} gutter={[12, 12]}>
-                    <Col>
-                      <Form.Item
-                        {...resetField}
-                        name={[name, "isActive"]}
-                        valuePropName="checked"
-                      >
-                        <Switch
-                          defaultChecked={true}
-                          checkedChildren={<CheckOutlined />}
-                          unCheckedChildren={<CloseOutlined />}
-                        />
-                      </Form.Item>
-                    </Col>
-                    <Col span={9} lg={9}>
-                      <Form.Item
-                        {...resetField}
-                        name={[name, "english"]}
-                        rules={RulesEnglishField}
-                      >
-                        <Input size="large" placeholder={ENGLISH_TEXT} />
-                      </Form.Item>
-                    </Col>
-                    <Col span={9}>
-                      <Form.Item
-                        {...resetField}
-                        name={[name, "russia"]}
-                        rules={RulesRussiaField}
-                      >
-                        <Input placeholder={RUSSIA_TEXT} size="large" />
-                      </Form.Item>
-                    </Col>
-                    <Col span={3}>
-                      <Button
-                        danger={true}
-                        block={true}
-                        onClick={() => remove(name)}
-                        size="large"
-                      >
-                        <DeleteOutlined />
-                      </Button>
-                    </Col>
-                  </Row>
+                {fields.map(({ key, name, ...resetField }, index) => (
+                  <Item
+                    key={key}
+                    name={name}
+                    resetField={resetField}
+                    onRemove={remove}
+                    index={index}
+                  />
                 ))}
                 <Row>
-                  <Col span={23}>
+                  <Col span={24}>
                     <Button
                       icon={<PlusOutlined />}
                       onClick={() => add()}

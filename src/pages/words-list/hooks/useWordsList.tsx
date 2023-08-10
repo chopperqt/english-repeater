@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
 import { WordsForm, WordsValues } from "models/main";
-import { nextStep, setWords } from "services/settings/settings";
+import { nextStep, setOnlyWords, setWords } from "services/settings/settings";
 import { getPinWords, getRandomWords } from "api/library.api";
 
 import { getNormalizeWords } from "../helpers/getNormalizedWords";
@@ -71,6 +71,10 @@ const useWordsList = ({ userId, words, setFieldsValue }: UseWordList) => {
     setLimit(newLimit);
   };
 
+  const handleReset = () => {
+    dispatch(setOnlyWords([]));
+  };
+
   const hasDisabled = !amountOfWords;
 
   useEffect(() => {
@@ -83,6 +87,7 @@ const useWordsList = ({ userId, words, setFieldsValue }: UseWordList) => {
     handleGetPinWords,
     handleGetRandomWords,
     handleChangeLimit,
+    handleReset,
     limit,
     hasDisabled,
     wordsFromLocal,
