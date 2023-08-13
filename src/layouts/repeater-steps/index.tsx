@@ -1,6 +1,6 @@
 import { Steps } from "antd";
 
-import styles from "./repeater-steps.module.scss";
+import styles from "./RepeaterSteps.module.scss";
 
 interface RepeaterStepsProps {
   currentStep: number;
