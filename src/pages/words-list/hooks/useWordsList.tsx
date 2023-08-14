@@ -6,6 +6,8 @@ import { nextStep, setOnlyWords, setWords } from "services/settings/settings";
 import { getPinWords, getRandomWords } from "api/library.api";
 
 import { getNormalizeWords } from "../helpers/getNormalizedWords";
+import { useRequestStatus } from "utils/use-request-status";
+import { LibraryWord } from "models/library";
 
 const defaultValue = {
   words: [],
@@ -55,13 +57,9 @@ const useWordsList = ({ userId, words, setFieldsValue }: UseWordList) => {
     dispatch(nextStep());
   };
 
-  const handleGetPinWords = async () => {
-    if (!userId) return;
-
-    const res = await getPinWords(userId);
-
-    console.log(res);
-  };
+  const { isLoading, handleLoadData } = useRequestStatus<LibraryWord[] | null>({
+    callback: () => getPinWords(userId || ""),
+  });
 
   const handleGetRandomWords = async () => {
     await getRandomWords(limit);
@@ -84,13 +82,14 @@ const useWordsList = ({ userId, words, setFieldsValue }: UseWordList) => {
   return {
     handleChange,
     handleFinish,
-    handleGetPinWords,
+    handleLoadData,
     handleGetRandomWords,
     handleChangeLimit,
     handleReset,
     limit,
     hasDisabled,
     wordsFromLocal,
+    isLoading,
   };
 };
 

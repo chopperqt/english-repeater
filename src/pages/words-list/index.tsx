@@ -31,20 +31,27 @@ const List = () => {
     hasDisabled,
     wordsFromLocal,
     limit,
-    handleGetPinWords,
+    isLoading,
+    handleLoadData,
     handleGetRandomWords,
     handleChangeLimit,
     handleReset,
   } = useWordsList({ userId, words, setFieldsValue: form.setFieldsValue });
 
+  console.log("isLoading: ", isLoading);
+
   return (
     <Row justify="center" className={styles.layout}>
       <Col span={24}>
         <div className={styles.actionsWrapper}>
-          <Button onClick={handleGetPinWords} icon={<DownloadOutlined />}>
+          <Button onClick={handleLoadData} icon={<DownloadOutlined />}>
             {LOAD_PINED_WORDS_TEXT}
           </Button>
-          <Button onClick={handleGetRandomWords} icon={<DownloadOutlined />}>
+          <Button
+            loading={isLoading}
+            onClick={handleGetRandomWords}
+            icon={<DownloadOutlined />}
+          >
             {GET_RANGOM_WORDS_TEXT}
           </Button>
           <Select
