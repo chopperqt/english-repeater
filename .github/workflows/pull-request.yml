@@ -10,9 +10,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: ${{ github.ref_name }}
+          ref: ${{ github.head_ref }}
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: git config --global user.email "you@example.com" && git config --global user.name "Your Name"  &&  npm version patch && git push --force
+      - run: git status &&  git config --global user.email "you@example.com" && git config --global user.name "Your Name" && npm version patch && git show && git push "https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" "${{ github.head_ref }}"
