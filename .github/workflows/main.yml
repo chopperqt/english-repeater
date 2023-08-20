@@ -7,11 +7,9 @@ jobs:
   run-test:
     runs-on: ubuntu-20.04
     steps:
-      name: setup node
-      uses: actions/setup-node@v3
-        with:
-          node-verstion: 16
-      name: Install dependencies
-        run: npm install
-      name: Run tests
-        run: npm run test
+      - name: setup node
+      - uses: actions/setup-node@v3
+      - name: Install dependencies
+      - run: npm install
+      - name: Run tests
+      - run: npm run test
