@@ -3,3 +3,5 @@ test("loads and displays greeting", async () => {
   // Act
   // Assert
 });
+
+export { };
