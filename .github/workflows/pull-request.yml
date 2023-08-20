@@ -13,4 +13,4 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: git config --global user.email "you@example.com" && git config --global user.name "Your Name" && git pull  && npm version patch && git branch && git push --force
+      - run: git config --global user.email "you@example.com" && git config --global user.name "Your Name" && git pull && git checkout origin/main &&  npm version patch && git branch && git push --force
