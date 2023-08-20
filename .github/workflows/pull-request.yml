@@ -13,4 +13,4 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: git status &&  git config --global user.email "you@example.com" && git config --global user.name "Your Name" && git checkout main && git pull  && npm version patch && git push "https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" HEAD:main
+      - run: git config --global user.email "you@example.com" && git config --global user.name "Your Name" && git checkout main && git pull  && npm version patch && git push origin main --follow-tags --force
