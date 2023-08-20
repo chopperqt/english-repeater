@@ -6,7 +6,7 @@ import { nextStep, setOnlyWords, setWords } from "services/settings/settings";
 import { getPinWords, getRandomWords } from "api/library.api";
 
 import { getNormalizeWords } from "../helpers/getNormalizedWords";
-import { useRequestStatus } from "utils/use-request-status";
+import { ApiController } from "utils/api-controller";
 import { LibraryWord } from "models/library";
 
 const defaultValue = {
@@ -57,8 +57,16 @@ const useWordsList = ({ userId, words, setFieldsValue }: UseWordList) => {
     dispatch(nextStep());
   };
 
-  const { isLoading, handleLoadData } = useRequestStatus<LibraryWord[] | null>({
-    callback: () => getPinWords(userId || ""),
+  const { isLoading: isLoadingPinWords, handleRequest: handleLoadPinWords } =
+    ApiController<LibraryWord[] | null>({
+      callback: () => getPinWords(userId || ""),
+    });
+
+  const {
+    isLoading: isLoadingRandomWords,
+    handleRequest: handleLoadRandomWords,
+  } = ApiController<WordsValues[] | null>({
+    callback: () => getRandomWords(limit),
   });
 
   const handleGetRandomWords = async () => {
@@ -82,14 +90,15 @@ const useWordsList = ({ userId, words, setFieldsValue }: UseWordList) => {
   return {
     handleChange,
     handleFinish,
-    handleLoadData,
-    handleGetRandomWords,
+    handleLoadPinWords,
+    handleLoadRandomWords,
+    isLoadingRandomWords,
     handleChangeLimit,
     handleReset,
     limit,
     hasDisabled,
     wordsFromLocal,
-    isLoading,
+    isLoadingPinWords,
   };
 };
 
