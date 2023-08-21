@@ -3,7 +3,7 @@ on:
     branches:
       - main
     types:
-      - opened
+      - closed
 
 jobs:
   up-version:
@@ -20,4 +20,4 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: git config --global user.email "you@example.com" && git config --global user.name "Your Name" && npm version patch && git show && git push "https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" "${{ github.head_ref }}"
+      - run: git config --global user.email "you@example.com" && git config --global user.name "Your Name" && npm version patch && git show && git push "https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" main
