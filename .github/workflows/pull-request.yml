@@ -22,7 +22,7 @@ jobs:
           git config --global user.name "github-actions[bot]"
 
       - name: Git pull
-        run: git fetch --prune --unshallow
+        run: git pull
 
       - name: Git checkout
         run: git checkout origin/main
