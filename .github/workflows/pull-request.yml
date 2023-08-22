@@ -25,6 +25,9 @@ jobs:
       - name: Git branch
         run: git branch
 
+      - name: Git checkout
+        run: git checkout
+
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
