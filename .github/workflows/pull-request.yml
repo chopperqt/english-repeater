@@ -13,6 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
+          token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
           ref: ${{ github.event.pull_request.head.ref }}
 
       - name: Git config settings
@@ -36,7 +37,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: npm version patch && git status && git push "https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" origin/main --force
+      - run: npm version patch && git status && git push --force
 
       - name: Version change
         run: npm pkg get version
