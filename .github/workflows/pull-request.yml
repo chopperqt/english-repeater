@@ -35,4 +35,4 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: npm version patch && git show && git push "https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" origin/main
+      - run: npm version patch && git show && git push "https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" origin/main --force
