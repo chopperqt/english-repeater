@@ -27,7 +27,7 @@ jobs:
         run: git pull
 
       - name: Git checkout
-        run: git checkout
+        run: git checkout origin/main
 
       - name: Use Node.js
         uses: actions/setup-node@v3
