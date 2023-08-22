@@ -2,8 +2,6 @@ on:
   pull_request:
     branches:
       - main
-    types:
-      - closed
 
 jobs:
   up-version:
@@ -15,7 +13,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          fetch-depth: 0
           ref: ${{ github.event.pull_request.head.ref }}
 
       - name: Git config settings
@@ -30,13 +27,13 @@ jobs:
         run: git pull
 
       - name: Git checkout
-        run: git checkout origin/main
+        run: git checkout main
 
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: npm version patch && git push "https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" origin/main --follow-tags --force
+      - run: npm version patch && git push "https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" main --follow-tags --force
 
       - name: Version change
         run: npm pkg get version
