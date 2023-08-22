@@ -25,11 +25,14 @@ jobs:
       - name: Git branch
         run: git branch
 
+      - name: Git pull
+        run: git pull
+
       - name: Git checkout
-        run: git checkout
+        run: git checkout origin/main
 
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: npm version patch && git show && git push "https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" HEAD
+      - run: npm version patch && git show && git push "https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" origin/main
