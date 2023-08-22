@@ -33,7 +33,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: npm version patch -m "Update patch"
+      - run: npm version patch
 
       - name: Status
         run: git status
