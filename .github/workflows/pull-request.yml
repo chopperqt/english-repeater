@@ -39,7 +39,7 @@ jobs:
       - run: npm version patch
 
       - Push version
-      run: git push "https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" origin/main --follow-tags --force
+        run: git push "https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" origin/main --follow-tags --force
 
       - name: Version change
         run: npm pkg get version
