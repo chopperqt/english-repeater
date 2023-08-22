@@ -20,11 +20,11 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
 
-      - name: Git branch
-        run: git branch
-
       - name: Git pull
         run: git fetch --prune --unshallow
+
+      - name: Git branch
+        run: git branch
 
       - name: Git checkout
         run: git checkout origin/main
