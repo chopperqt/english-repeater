@@ -23,20 +23,20 @@ jobs:
       - name: Git pull
         run: git fetch --prune --unshallow
 
+      - name: Git checkout
+        run: git checkout origin/main
+
       - name: Git branch
         run: git branch
 
-      - name: Git checkout
-        run: git checkout origin/main
+      - name: Status
+        run: git status
 
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 16
       - run: npm version patch
-
-      - name: Status
-        run: git status
 
       # - Push version
       # run: git push "https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" origin/main --follow-tags --force
