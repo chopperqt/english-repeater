@@ -33,7 +33,13 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: npm version patch -m "Update patch" && git push "https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" origin/main --follow-tags --force
+      - run: npm version patch -m "Update patch"
+
+      - name: Status
+        run: git status
+
+      # - Push version
+      # run: git push "https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" origin/main --follow-tags --force
 
       - name: Version change
         run: npm pkg get version
