@@ -25,7 +25,7 @@ jobs:
         run: git pull
 
       - name: Git checkout
-        run: git checkout origin/main
+        run: git checkout main
 
       - name: Git branch
         run: git branch
@@ -37,7 +37,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: npm version patch && git status && git push origin origin/main --force
+      - run: npm version patch && git status && git push origin main --force
 
       - name: Version change
         run: npm pkg get version
