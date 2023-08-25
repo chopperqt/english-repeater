@@ -1,7 +1,7 @@
 {
   "name": "repeater",
   "author": "I.Tsvetkov",
-  "version": "0.1.26",
+  "version": "0.1.27",
   "private": true,
   "homepage": "/repeater/",
   "dependencies": {
