@@ -5,9 +5,9 @@ on:
       - main
     types:
       - opened
+
 jobs:
-  add_comment:
-    name: "Add Comment"
+  comment:
     runs-on: ubuntu-latest
     steps:
       - uses: mshick/add-pr-comment@v1
