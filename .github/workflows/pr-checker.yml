@@ -17,7 +17,7 @@ jobs:
       - uses: mheap/github-actions-require-labels@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          with:
-            mode: exactly
-            count: 1
-            labels: "major, minor, patch"
+        with:
+          mode: exactly
+          count: 1
+          labels: "major, minor, patch"
