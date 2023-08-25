@@ -1,0 +1,16 @@
+name: "Open MR"
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: mshick/add-pr-comment@v1
+        with:
+          message: Please set a versioning label of either `major`, `minor`, or `patch` to the pull request.
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
