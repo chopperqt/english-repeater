@@ -1,4 +1,4 @@
-name: "Open MR"
+name: "PR - Open"
 on:
   pull_request:
     branches:

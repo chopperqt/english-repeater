@@ -1,3 +1,4 @@
+name: "PL - Closed"
 on:
   pull_request:
     branches:
@@ -39,7 +40,21 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: npm version patch && git status && git push origin main --force
+
+      - name: Apply verrsion bump (major)
+        if: contains(github.event.pull_request.labels.*.name, 'major')
+        run: npm version major
+
+      - name: Apply verrsion bump (minor)
+        if: contains(github.event.pull_request.labels.*.name, 'minor')
+        run: npm version minor
+
+      - name: Apply verrsion bump (patch)
+        if: contains(github.event.pull_request.labels.*.name, 'patch')
+        run: npm version patch
+
+      - name: Git push version bump
+      - run: git push origin main --force
 
       - name: Version change
         run: npm pkg get version
