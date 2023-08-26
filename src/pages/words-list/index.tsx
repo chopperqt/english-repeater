@@ -29,7 +29,6 @@ const List = () => {
     handleChange,
     handleFinish,
     hasDisabled,
-    wordsFromLocal,
     limit,
     isLoadingPinWords,
     isLoadingRandomWords,
@@ -70,7 +69,9 @@ const List = () => {
         <Form
           form={form}
           onValuesChange={handleChange}
-          initialValues={wordsFromLocal}
+          initialValues={{
+            words,
+          }}
           onFinish={handleFinish}
           className={styles.form}
         >
