@@ -54,7 +54,7 @@ jobs:
         run: npm version patch
 
       - name: Git push version bump
-      - run: git push origin main --force
+        run: git push origin main --force
 
       - name: Version change
         run: npm pkg get version
