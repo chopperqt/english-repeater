@@ -19,3 +19,5 @@ export const StatisticSchema = object({
 });
 
 export type StatisticModel = Output<typeof StatisticSchema>;
+
+export type StatisticModelWrite = Omit<StatisticModel, 'id' | 'created_at'>
