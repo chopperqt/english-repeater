@@ -43,6 +43,8 @@ const Result = () => {
     errorWords,
   } = useResult()
 
+  console.log('errorWoeds', errorWords)
+
   const amountOfWords = useSelector((state: RootState) => state.game.words).length
   const amountOfCompleteWords = useSelector(getAmountOfCompleteWords)
   const amountOfErrorWords = useSelector(getAmountOfErrorWords)
