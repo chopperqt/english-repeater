@@ -27,7 +27,7 @@ import {
 } from 'language/ru'
 import { Columns } from './constants'
 import { RootState } from 'services/store'
-import useResult from './useResult'
+import { useResult } from './hooks/use-result'
 
 import styles from './Result.module.scss'
 
@@ -42,8 +42,6 @@ const Result = () => {
     handleReset,
     errorWords,
   } = useResult()
-
-  console.log('errorWoeds', errorWords)
 
   const amountOfWords = useSelector((state: RootState) => state.game.words).length
   const amountOfCompleteWords = useSelector(getAmountOfCompleteWords)
