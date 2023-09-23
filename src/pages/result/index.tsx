@@ -27,7 +27,7 @@ import {
 } from 'language/ru'
 import { Columns } from './constants'
 import { RootState } from 'services/store'
-import useResult from './useResult'
+import { useResult } from './hooks/use-result'
 
 import styles from './Result.module.scss'
 

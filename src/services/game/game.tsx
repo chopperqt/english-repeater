@@ -153,6 +153,31 @@ export const getEnglishErrorWords = createSelector(
   }
 )
 
+export const getEnglishCorrectWords = createSelector(
+  (state: RootState) => state.game.words,
+  (words) => {
+    return words.reduce((acc: GameErrorWords[], {
+      status,
+      english,
+      russia,
+      enteredWord,
+    }) => {
+      if (status !== 'COMPLETE') {
+        return acc
+      }
+
+      return [
+        ...acc,
+        {
+          word: normalizeWord(russia),
+          translate: normalizeWord(english),
+          enteredWord: enteredWord || '',
+        }
+      ]
+    }, [])
+  }
+)
+
 export const {
   nextWords,
   setWord,

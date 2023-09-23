@@ -5,6 +5,7 @@ import {
   DeleteOutlined,
   DownloadOutlined,
 } from "@ant-design/icons";
+import { nanoid } from "nanoid";
 
 import { RootState } from "services/store";
 import { ADD_BUTTON_TEXT, START_BUTTON_TEXT } from "language/ru";
@@ -80,7 +81,8 @@ const List = () => {
               <Col span={24}>
                 {fields.map(({ key, name, ...resetField }, index) => (
                   <Item
-                    key={key}
+                    key={nanoid()}
+                    id={key}
                     name={name}
                     resetField={resetField}
                     onRemove={remove}

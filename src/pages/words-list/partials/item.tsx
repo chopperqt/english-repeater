@@ -10,8 +10,8 @@ import { ENGLISH_TEXT, RUSSIA_TEXT } from "language/ru";
 import styles from "../WordsList.module.scss";
 
 interface ItemProps {
-  key: number;
   name: number;
+  id: number;
   /**
    * NOTE: Потом поменять на нормальный тип
    */
@@ -20,7 +20,7 @@ interface ItemProps {
   onRemove: (key: number) => void;
 }
 
-export const Item = ({ key, name, resetField, index, onRemove }: ItemProps) => {
+export const Item = ({ id, name, resetField, index, onRemove }: ItemProps) => {
   const formattedIndex = `${index + 1}.`;
 
   const defaultOptions = {
@@ -29,7 +29,7 @@ export const Item = ({ key, name, resetField, index, onRemove }: ItemProps) => {
   };
 
   return (
-    <div className={styles.wrapper} key={key}>
+    <div className={styles.wrapper}>
       <Row className={styles.offset} align="top">
         {formattedIndex}
       </Row>
