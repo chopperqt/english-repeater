@@ -82,13 +82,12 @@ const WordForm = () => {
           >
             <Col>
               <Button
-                danger={true}
-                type="primary"
+                icon={<StepForwardOutlined />}
+                htmlType="submit"
                 size="large"
-                icon={<CloseOutlined />}
-                onClick={handleReset}
+                type="primary"
               >
-                {END_TEXT}
+                {NEXT_TEXT}
               </Button>
             </Col>
             <Col>
@@ -102,12 +101,13 @@ const WordForm = () => {
             </Col>
             <Col>
               <Button
-                icon={<StepForwardOutlined />}
-                htmlType="submit"
-                size="large"
+                danger={true}
                 type="primary"
+                size="large"
+                icon={<CloseOutlined />}
+                onClick={handleReset}
               >
-                {NEXT_TEXT}
+                {END_TEXT}
               </Button>
             </Col>
           </Row>
